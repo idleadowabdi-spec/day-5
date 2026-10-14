@@ -1,0 +1,362 @@
+# DAY 5 ASSIGNMENT: TECHNICAL WRITING
+
+**Name:** Idle Abdi  
+**Course:** Software Engineering  
+**Module:** Software Engineering Essentials  
+**Assignment:** Day 5 Technical Writing
+
+# EXERCISE A: USER MANUAL PROCEDURE
+
+## Title: How to Create a GitHub Repository and Make Your First Commit
+
+### 1. Introduction
+
+GitHub is an online platform used to store, manage, and share source code. A repository is a location where project files and their change history are stored. This procedure explains how a beginner can create a GitHub repository, add a project file, and make the first commit using Git.
+
+### 2. Prerequisites
+
+Before starting, the user needs:
+
+- A computer with an internet connection.
+- A GitHub account.
+- Git installed on the computer.
+- A text editor such as Visual Studio Code.
+- Basic knowledge of creating and saving files.
+
+### 3. Step-by-Step Instructions
+
+**Step 1: Open GitHub.**
+
+Action: Open a web browser and visit `https://github.com`.
+
+Expected result: The GitHub website opens.
+
+**Step 2: Sign in to GitHub.**
+
+Action: Enter your GitHub username or email address and password.
+
+Expected result: Your GitHub dashboard appears.
+
+**Step 3: Start creating a repository.**
+
+Action: Click the **New repository** option.
+
+Expected result: The repository creation page appears.
+
+**Step 4: Enter the repository name.**
+
+Action: Type `my-first-project` in the repository name field.
+
+Expected result: The repository name is entered correctly.
+
+**Step 5: Select repository visibility.**
+
+Action: Choose **Public** as the repository visibility.
+
+Expected result: The repository is configured to be publicly accessible.
+
+**Step 6: Create the repository.**
+
+Action: Click **Create repository**.
+
+Expected result: GitHub displays the new repository page.
+
+**Step 7: Open a terminal.**
+
+Action: Open Git Bash on your computer.
+
+Expected result: A Git Bash terminal window appears.
+
+**Step 8: Create a local project directory.**
+
+Action: Run the following command:
+
+```bash
+mkdir my-first-project
+```
+
+Expected result: A folder named `my-first-project` is created in the current directory.
+
+**Step 9: Enter the project directory.**
+
+Action: Run:
+
+```bash
+cd my-first-project
+```
+
+Expected result: The terminal enters the project directory.
+
+**Step 10: Initialize Git.**
+
+Action: Run:
+
+```bash
+git init
+```
+
+Expected result: Git initializes a local repository.
+
+**Step 11: Create a project file.**
+
+Action: Run:
+
+```bash
+echo "# My First Project" > README.md
+```
+
+Expected result: A `README.md` file is created containing the project heading.
+
+**Step 12: Stage the file.**
+
+Action: Run:
+
+```bash
+git add README.md
+```
+
+Expected result: The README file is staged for the next commit.
+
+**Step 13: Make the first commit.**
+
+Action: Run:
+
+```bash
+git commit -m "Initial commit"
+```
+
+Expected result: Git records the staged file in the local repository. If Git requests your identity, configure your name and email before repeating the commit.
+
+**Step 14: Set the main branch name.**
+
+Action: Run:
+
+```bash
+git branch -M main
+```
+
+Expected result: The current branch is named `main`.
+
+**Step 15: Connect the local repository to GitHub.**
+
+Action: Replace `YOUR_USERNAME` with your GitHub username and run:
+
+```bash
+git remote add origin https://github.com/YOUR_USERNAME/my-first-project.git
+```
+
+Expected result: The local repository has a remote named `origin` pointing to your GitHub repository.
+
+**Step 16: Upload the commit to GitHub.**
+
+Action: Run:
+
+```bash
+git push -u origin main
+```
+
+Expected result: The local commit is uploaded to GitHub, provided authentication is successful and the remote repository does not contain conflicting history.
+
+### 4. Screenshot Description
+
+**Screenshot 1: GitHub Repository**
+
+The screenshot should show the GitHub repository page with the repository name `my-first-project` and its public visibility.
+
+**Screenshot 2: Successful First Commit**
+
+The screenshot should show Git Bash with the `git commit` command and its successful output.
+
+**Screenshot 3: Uploaded Project**
+
+The screenshot should show the GitHub repository containing `README.md` after the push operation succeeds.
+
+### 5. Troubleshooting
+
+**Problem: Git reports that it does not know the author's identity.**
+
+Git requires a configured name and email address to create commits.
+
+**Solution:** Run the following commands, replacing the example details with your own:
+
+```bash
+git config --global user.name "Your Name"
+git config --global user.email "your-email@example.com"
+```
+
+Then repeat the commit command.
+
+If pushing fails because GitHub authentication is required, sign in through the supported authentication method. Do not share your password or access token with other people.
+
+### 6. Conclusion
+
+Creating a GitHub repository and making an initial commit provides a foundation for version control. Git tracks changes locally, while GitHub stores the project remotely and makes collaboration easier.
+
+---
+
+# EXERCISE B: API REFERENCE ENTRY
+
+## API Title: Create a Task in a Project Management Application
+
+### 1. Overview
+
+The Create Task API allows an authenticated user to add a new task to an existing project. The request contains the task title, optional description, assigned user's ID, due date, and priority. When the request is valid and authorized, the API saves the task and returns its details.
+
+### 2. Endpoint Information
+
+| Item | Description |
+|---|---|
+| HTTP method | `POST` |
+| Endpoint | `/api/v1/projects/{project_id}/tasks` |
+| Request format | JSON |
+| Response format | JSON |
+| Authentication | Bearer access token |
+| Successful status | `201 Created` |
+
+### 3. Path Parameters
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `project_id` | Integer | Yes | Identifies the project in which the task will be created. |
+
+Example path:
+
+`/api/v1/projects/25/tasks`
+
+In this example, `25` is the project ID.
+
+### 4. Query Parameters
+
+This endpoint does not require any query parameters.
+
+### 5. Request Body Parameters
+
+| Parameter | Type | Required | Description |
+|---|---|---|---|
+| `title` | String | Yes | Task title, between 1 and 200 characters after trimming whitespace. |
+| `description` | String | No | Additional details about the task. Defaults to an empty string when omitted. |
+| `assignee_id` | Integer | Yes | ID of the existing user assigned to the task. |
+| `due_date` | String (date) | Yes | Task deadline in `YYYY-MM-DD` format. |
+| `priority` | String | Yes | Task priority. Allowed values are `low`, `medium`, and `high`. |
+
+### 6. Request Headers
+
+| Header | Required | Purpose |
+|---|---|---|
+| `Authorization` | Yes | Sends the access token as `Bearer <access_token>`. |
+| `Content-Type` | Yes | Must be `application/json`. |
+| `Accept` | No | May be set to `application/json` to request a JSON response. |
+
+### 7. Example Request
+
+The following request creates a task in project `25` and assigns it to user `108`.
+
+```http
+POST /api/v1/projects/25/tasks HTTP/1.1
+Host: api.example.com
+Authorization: Bearer YOUR_ACCESS_TOKEN
+Content-Type: application/json
+Accept: application/json
+```
+
+**Request body:**
+
+```json
+{
+  "title": "Prepare the project presentation",
+  "description": "Create slides and review the project milestones.",
+  "assignee_id": 108,
+  "due_date": "2026-11-20",
+  "priority": "medium"
+}
+```
+
+### 8. Successful Response
+
+**Status code:** `201 Created`
+
+The API returns this status when the task is successfully created.
+
+**Example response body:**
+
+```json
+{
+  "id": 702,
+  "project_id": 25,
+  "title": "Prepare the project presentation",
+  "description": "Create slides and review the project milestones.",
+  "assignee_id": 108,
+  "due_date": "2026-11-20",
+  "priority": "medium",
+  "status": "pending",
+  "created_at": "2026-10-14T09:00:00Z",
+  "updated_at": "2026-10-14T09:00:00Z"
+}
+```
+
+The `id` field is generated by the server. The `status` field defaults to `pending`, while the timestamps record when the task was created and last updated.
+
+### 9. HTTP Response Codes
+
+| Status code | Meaning | When it occurs |
+|---|---|---|
+| `201 Created` | Task created | The task was saved successfully. |
+| `400 Bad Request` | Invalid request | The JSON is malformed or a field has the wrong data type. |
+| `401 Unauthorized` | Authentication required | The token is missing, invalid, or expired. |
+| `403 Forbidden` | Access denied | The user is authenticated but lacks permission to create tasks in the project. |
+| `404 Not Found` | Resource not found | The project or assignee does not exist or is not accessible to the requester. |
+| `409 Conflict` | Conflict | The request conflicts with a defined application rule, such as a duplicate-task restriction. |
+| `415 Unsupported Media Type` | Unsupported format | The request does not use `application/json`. |
+| `422 Unprocessable Content` | Validation failed | The JSON is valid, but a field fails a business rule, such as an invalid priority or date. |
+| `429 Too Many Requests` | Rate limit exceeded | The client has sent too many requests within the permitted period. |
+| `500 Internal Server Error` | Server error | An unexpected server problem prevents the operation. |
+| `503 Service Unavailable` | Service unavailable | The service is temporarily unable to process the request. |
+
+### 10. Example Error Response
+
+**Status code:** `422 Unprocessable Content`
+
+```json
+{
+  "error": {
+    "code": "VALIDATION_ERROR",
+    "message": "One or more fields are invalid.",
+    "details": {
+      "priority": "Priority must be low, medium, or high."
+    }
+  }
+}
+```
+
+The error message identifies the invalid field so the client can correct the request.
+
+### 11. Validation and Business Rules
+
+The API should apply these rules:
+
+1. The task title is required and must contain 1–200 characters after trimming whitespace.
+2. The description is optional and must be a string if supplied.
+3. The project must exist and be accessible to the authenticated user.
+4. The assignee must be an eligible, existing user.
+5. The due date must be a valid date in `YYYY-MM-DD` format.
+6. The priority must be exactly `low`, `medium`, or `high`.
+7. The server must verify the access token and the user's permissions before creating the task.
+8. The server generates the task ID and timestamps rather than trusting values supplied by the client.
+
+### 12. Security Considerations
+
+All API communication should use HTTPS. Access tokens must be validated securely, and users must only create tasks in projects they are authorized to access. Input validation helps prevent invalid data, while rate limiting helps protect the service from abuse. Sensitive information must not be exposed in error responses.
+
+### 13. Conclusion
+
+The Create Task API provides a consistent way to create and manage project tasks. Complete documentation of endpoint details, parameters, authentication, examples, validation rules, and response codes helps developers integrate the API accurately and troubleshoot errors efficiently.
+
+---
+
+# FINAL SUBMISSION CHECKLIST
+
+- [ ] Include your correct name and course details.
+- [ ] Include both Exercise A and Exercise B.
+- [ ] Check that all commands and JSON examples are formatted correctly.
+- [ ] Add genuine screenshots for Exercise A if required.
+- [ ] Proofread the document before submitting it through the PLP learning platform.
